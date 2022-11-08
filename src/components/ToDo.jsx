@@ -11,20 +11,22 @@ const ToDo = ({ allTasks, deleteTask, upper }) => {
             className='h-60 bg-gray-500 rounded-sm py-4 px-6 transition-all duration-1000 relative'
           >
             <h2 className='text-2xl py-2 border-b-[1px]'>{task.title}</h2>
-            <div>
-              <p className='mt-4'>{task.description}</p>
+            <div className='mt-4'>
+              <div className='h-24 overflow-auto'>
+                <p>{task.description}</p>
+              </div>
               {task.isCompleted ? (
-                <p className='absolute bottom-6 text-4xl text-green-500 left-6'>
+                <p className='absolute bottom-4 text-2xl text-green-500 left-4'>
                   <i class='fa-regular fa-circle-check'></i>
                 </p>
               ) : (
-                <p className='absolute bottom-6 text-4xl  left-6'>
+                <p className='absolute bottom-4 text-2xl  left-4'>
                   <i class='text-red-500 fa-regular fa-circle-check'></i>
                 </p>
               )}
             </div>
             <button
-              className='text-gray-700 font-bold text-4xl absolute right-6 bottom-6'
+              className='text-gray-700 font-bold text-2xl absolute right-4 bottom-4'
               onClick={() => deleteTask(task.id)}
             >
               <i className='fa-solid fa-ban'></i>

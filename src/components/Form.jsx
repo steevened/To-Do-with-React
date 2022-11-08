@@ -33,12 +33,9 @@ const Form = ({ addTask, upper }) => {
     setTitle('')
     setDescription('')
   }
-  // useEffect(() => {
-  //   setTitle(upper(title))
-  // }, [])
 
   return (
-    <div className='py-4 px-5 md:basis-3/12 border-r-[1px] border-gray-600 bg-gray-900/25 text-neutral-200'>
+    <div className='py-2 md:py-4 px-5 sm:basis-6/12 md:basis-3/12 md:border-r-[1px] border-b-[1px] border-gray-600 bg-gray-900/25 text-neutral-200'>
       <div className='flex flex-col gap-2 my-3 '>
         <h1 className=' text-center  text-4xl'>To Do App</h1>
         <h2 className='text-center text-2xl'>{`${hour < 10 ? 0 + hour : hour}:${

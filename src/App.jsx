@@ -25,7 +25,7 @@ function App() {
   return (
     <div className='App bg-gradient-to-br from-slate-500 via-slate-700 to-slate-900 h-screen flex items-center justify-center'>
       <Card>
-        <div className='flex flex-col md:flex-row  w-full h-full relative'>
+        <div className='flex flex-col md:flex-row w-full h-full relative'>
           <Form addTask={addTask} upper={upper} />
           <ToDo allTasks={allTasks} deleteTask={deleteTask} upper={upper} />
         </div>
