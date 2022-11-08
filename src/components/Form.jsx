@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ToDo from './ToDo'
 
-const Form = ({ addTask }) => {
+const Form = ({ addTask, upper }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isCompleted, setIsCompleted] = useState(false)
@@ -33,31 +33,34 @@ const Form = ({ addTask }) => {
     setTitle('')
     setDescription('')
   }
+  // useEffect(() => {
+  //   setTitle(upper(title))
+  // }, [])
 
   return (
-    <div className='py-4 px-5 w-80 border-r-[1px] border-gray-600 top-0 bottom-0 absolute bg-gray-900/25 text-neutral-200'>
-      <div className='flex flex-col gap-2 mb-4'>
+    <div className='py-4 px-5 md:basis-3/12 border-r-[1px] border-gray-600 bg-gray-900/25 text-neutral-200'>
+      <div className='flex flex-col gap-2 my-3 '>
         <h1 className=' text-center  text-4xl'>To Do App</h1>
-        <h2 className='text-center text-lg'>{`${hour < 10 ? 0 + hour : hour}:${
+        <h2 className='text-center text-2xl'>{`${hour < 10 ? 0 + hour : hour}:${
           minutes < 10 ? 0 + minutes : minutes
         }:${seconds < 10 ? 0 + seconds : seconds}`}</h2>
       </div>
 
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className='mt-6'>
         <div className='flex flex-col gap-y-5'>
           <div className='w-full'>
             <input
-              className='w-full bg-gray-800 rounded-sm focus:bg-gray-700 focus:outline-none border-[1px] border-gray-600 py-2 px-4'
+              className='w-full bg-gray-800 rounded-sm focus:bg-gray-700 outline-none border-[1px] border-gray-600 py-2 px-4 transition-all'
               placeholder='Task Title'
               type='text'
               id='title'
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setTitle(upper(e.target.value))}
             />
           </div>
           <div className='w-full'>
             <textarea
-              className='w-full bg-gray-800 rounded-sm focus:bg-gray-700  border-[1px] border-gray-600 py-2 px-4 focus:outline-none focus-border-none'
+              className='outline-none w-full bg-gray-800 rounded-sm focus:bg-gray-700  border-[1px] border-gray-600 py-2 px-4 focus:outline-none focus-border-none transition-all'
               id='description'
               placeholder='Description'
               value={description}
@@ -71,12 +74,12 @@ const Form = ({ addTask }) => {
         <div className=' flex justify-between mt-4 items-center'>
           <input
             type='checkbox'
-            className='form-check-input bg-gray-300 checked:bg-sky-500 focus:outline-none active:animate-ping active:outline-none w-5 h-5 active:border-none focus:border-none border-none outline-none appearance-none rounded-full text-sky-200'
+            className='appearance-none form-check-input bg-gray-300 checked:bg-sky-500 focus:outline-none  w-8 h-8 border-none rounded-full text-sky-200 transition-all cursor-pointer shadow-md shadow-gray-900'
             id='isCompleted'
             value={isCompleted}
             onChange={(e) => setIsCompleted(e.target.checked)}
           />
-          <button className='text-sky-100 font-medium bg-sky-500 hover:bg-sky-700 transition-colors px-4 py-1 rounded-md shadow-lg shadow-gray-900 hover:text-white'>
+          <button className='text-sky-100 font-medium bg-gradient-to-r from-sky-500 to-sky-500/75 hover:bg-gradient-to-r hover:from-sky-700 hover:to-sky-800 transition-colors px-4 py-1 rounded-sm shadow-md shadow-gray-900 hover:text-white'>
             Submit
           </button>
         </div>

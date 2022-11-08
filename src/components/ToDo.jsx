@@ -1,22 +1,33 @@
 import React from 'react'
 
-const ToDo = ({ allTasks, deleteTask }) => {
+const ToDo = ({ allTasks, deleteTask, upper }) => {
   return (
-    <div className='text-zinc-100 text-left'>
+    <div className='text-zinc-100 text-left p-8 w-full flex items-center justify-center '>
       {/* <h1 className='text-3xl'>To Do</h1> */}
-      <ul>
+      <ul className='grid md:grid-cols-2  p-1 w-full h-full gap-10 overflow-y-auto '>
         {allTasks.map((task) => (
-          <li key={task.id}>
-            <h2 className='text-2xl'>{task.title}</h2>
+          <li
+            key={task.id}
+            className='h-60 bg-gray-500 rounded-sm py-4 px-6 transition-all duration-1000 relative'
+          >
+            <h2 className='text-2xl py-2 border-b-[1px]'>{task.title}</h2>
             <div>
-              <p>Description: {task.description}</p>
-              <p>Completed: {task.isCompleted.toString()}</p>
+              <p className='mt-4'>{task.description}</p>
+              {task.isCompleted ? (
+                <p className='absolute bottom-6 text-4xl text-green-500 left-6'>
+                  <i class='fa-regular fa-circle-check'></i>
+                </p>
+              ) : (
+                <p className='absolute bottom-6 text-4xl  left-6'>
+                  <i class='text-red-500 fa-regular fa-circle-check'></i>
+                </p>
+              )}
             </div>
             <button
-              className='text-slate-100 font-bold bg-red-500 px-4 py-1 rounded-full'
+              className='text-gray-700 font-bold text-4xl absolute right-6 bottom-6'
               onClick={() => deleteTask(task.id)}
             >
-              Delete
+              <i className='fa-solid fa-ban'></i>
             </button>
           </li>
         ))}
