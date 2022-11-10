@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ToDo from './ToDo'
 
-const Form = ({ addTask, taskSelected, update }) => {
+const Form = ({ addTask, taskSelected, update, upper }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isCompleted, setIsCompleted] = useState(false)
@@ -71,7 +71,7 @@ const Form = ({ addTask, taskSelected, update }) => {
               type='text'
               id='title'
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setTitle(upper(e.target.value))}
             />
           </div>
           <div className='w-full'>

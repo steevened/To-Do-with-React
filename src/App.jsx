@@ -33,6 +33,10 @@ function App() {
       .then(() => getTasks())
   }
 
+  const select = (task) => {
+    setTaskSelected(task)
+  }
+
   const update = (task) => {
     axios
       .put(`http://todos-crud.academlo.tech/todos/${taskSelected.id}/`, task)
@@ -41,15 +45,9 @@ function App() {
     setTaskSelected(null)
   }
 
-  // const upper = (str) => {
-  //   return str.replace(str[0], str[0].toUpperCase())
-  // }
-
-  const select = (task) => {
-    setTaskSelected(task)
+  const upper = (str) => {
+    return str.replace(str[0], str[0].toUpperCase())
   }
-
-  // console.log(taskSelected)
 
   return (
     <div className='App bg-gradient-to-br from-slate-500 via-slate-700 to-slate-900 h-screen flex items-center justify-center'>
@@ -60,6 +58,7 @@ function App() {
             selected={select}
             taskSelected={taskSelected}
             update={update}
+            upper={upper}
           />
           <ToDo allTasks={allTasks} deleteTask={deleteTask} select={select} />
         </div>
