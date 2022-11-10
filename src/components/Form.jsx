@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ToDo from './ToDo'
 
-const Form = ({ addTask, upper }) => {
+const Form = ({ addTask, taskSelected, update }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isCompleted, setIsCompleted] = useState(false)
@@ -20,6 +20,16 @@ const Form = ({ addTask, upper }) => {
     }, 1000)
   })
 
+  useEffect(() => {
+    if (taskSelected !== null) {
+      setTitle(taskSelected.title)
+      setDescription(taskSelected.description)
+      setIsCompleted(taskSelected.isCompleted)
+    } else {
+      reset()
+    }
+  }, [taskSelected])
+
   const submit = (e) => {
     e.preventDefault()
     const info = {
@@ -29,13 +39,22 @@ const Form = ({ addTask, upper }) => {
       isCompleted,
     }
 
-    addTask(info)
+    if (taskSelected) {
+      update(info)
+    } else {
+      addTask(info)
+    }
+    reset()
+  }
+
+  const reset = () => {
     setTitle('')
     setDescription('')
+    setIsCompleted(false)
   }
 
   return (
-    <div className='py-2 md:py-4 px-5 sm:basis-6/12 md:basis-3/12 md:border-r-[1px] border-b-[1px] border-gray-600 bg-gray-900/25 text-neutral-200'>
+    <div className='py-2 md:py-4 px-5 sm:basis-6/12 md:basis-3/12 md:border-r-[1px] border-b-[1px] border-gray-600 bg-gray-900/25 text-neutral-200 md:border-b-0'>
       <div className='flex flex-col gap-2 my-3 '>
         <h1 className=' text-center  text-4xl'>To Do App</h1>
         <h2 className='text-center text-2xl'>{`${hour < 10 ? 0 + hour : hour}:${
@@ -52,7 +71,7 @@ const Form = ({ addTask, upper }) => {
               type='text'
               id='title'
               value={title}
-              onChange={(e) => setTitle(upper(e.target.value))}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className='w-full'>
@@ -71,7 +90,7 @@ const Form = ({ addTask, upper }) => {
         <div className=' flex justify-between mt-4 items-center'>
           <input
             type='checkbox'
-            className='appearance-none form-check-input bg-gray-300 checked:bg-sky-500 focus:outline-none  w-8 h-8 border-none rounded-full text-sky-200 transition-all cursor-pointer shadow-md shadow-gray-900'
+            className='appearance-none form-check-input bg-gray-300 checked:bg-sky-500 focus:outline-none  w-6 h-6 border-none rounded-full text-sky-200 transition-all cursor-pointer shadow-md shadow-gray-900'
             id='isCompleted'
             value={isCompleted}
             onChange={(e) => setIsCompleted(e.target.checked)}

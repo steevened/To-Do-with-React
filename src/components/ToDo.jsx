@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ToDo = ({ allTasks, deleteTask, upper }) => {
+const ToDo = ({ allTasks, deleteTask, select }) => {
   return (
     <div className='text-zinc-100 text-left p-8 w-full flex items-center justify-center '>
       {/* <h1 className='text-3xl'>To Do</h1> */}
@@ -17,11 +17,11 @@ const ToDo = ({ allTasks, deleteTask, upper }) => {
               </div>
               {task.isCompleted ? (
                 <p className='absolute bottom-4 text-2xl text-green-500 left-4'>
-                  <i class='fa-regular fa-circle-check'></i>
+                  <i className='fa-regular fa-circle-check'></i>
                 </p>
               ) : (
                 <p className='absolute bottom-4 text-2xl  left-4'>
-                  <i class='text-red-500 fa-regular fa-circle-check'></i>
+                  <i className='text-red-500 fa-regular fa-circle-check'></i>
                 </p>
               )}
             </div>
@@ -30,6 +30,12 @@ const ToDo = ({ allTasks, deleteTask, upper }) => {
               onClick={() => deleteTask(task.id)}
             >
               <i className='fa-solid fa-ban'></i>
+            </button>
+            <button
+              className='absolute  bottom-4 left-1/2 text-2xl text-amber-600'
+              onClick={() => select(task)}
+            >
+              <i className='fa-regular fa-pen-to-square'></i>
             </button>
           </li>
         ))}
